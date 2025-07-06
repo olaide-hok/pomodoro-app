@@ -1,4 +1,80 @@
+/* ------------------- */
+/* Custom properties   */
+/* ------------------- */
+
 :root {
+    /* colors */
+    --clr-black: 0 0% 0%;
+    --clr-white: 0 0% 100%;
+
+    --clr-blue-950: 233, 39%, 13%;
+    --clr-blue-900: 234, 39%, 14%;
+    --clr-blue-850: 235, 35%, 18%;
+    --clr-blue-100: 227, 100%, 92%;
+    --clr-blue-50: 229, 52%, 96%;
+
+    --clr-grey-400: 233, 13%, 76%;
+    --clr-grey-200: 0, 3%, 89%;
+
+    --clr-cyan-300: 182, 91%, 71%;
+
+    --clr-red-400: 0, 91%, 71%;
+
+    --clr-purple-400: 284, 89%, 74%;
+
+    /* gradient */
+    --clr-gradient-1: linear-gradient(
+        180deg,
+        hsl(235, 32%, 27%),
+        hsl(234, 50%, 11%)
+    );
+
+    /* font-families */
+    --ff-kumbh-sans: 'Kumbh Sans', sans-serif;
+    --ff-roboto-slab: 'Roboto Slab', serif;
+    --ff-space-mono: 'Space Mono', monospace;
+
+    /* font-sizes */
+    --fs-100: 6.25rem;
+    --fs-80: 5rem;
+    --fs-56: 3.5rem;
+    --fs-28: 1.75rem;
+    --fs-24: 1.5rem;
+    --fs-18: 1.125rem;
+    --fs-16: 1rem;
+    --fs-15: 0.9375rem;
+    --fs-14: 0.875rem;
+    --fs-13: 0.8125rem;
+    --fs-12: 0.75rem;
+
+    /* line-height */
+    --lh-120: 120%;
+    --lh-125: 125%;
+    --lh-130: 130%;
+    --lh-133: 133%;
+    --lh-145: 145%;
+    --lh-150: 150%;
+
+    /* letter spacing */
+    --ls-0: 0;
+    --ls-5n: -0.3125rem;
+    --ls-5p: 0.3125rem;
+    --ls-10n: -0.625rem;
+    --ls-10p: 0.625rem;
+    --ls-13: 0.8125rem;
+    --ls-15: 0.9375rem;
+
+    /* spacing */
+    --space-0: 0;
+    --space-100: 0.5rem;
+    --space-200: 1rem;
+    --space-300: 1.5rem;
+    --space-400: 2rem;
+    --space-500: 2.5rem;
+    --space-600: 3rem;
+    --space-700: 3.5rem;
+    --space-800: 4rem;
+    --space-1000: 5rem;
 }
 
 html,
@@ -9,7 +85,7 @@ body {
 
 body {
     color: white;
-    background: blue;
+    background: white;
     font-family: 'Kumbh Sans', 'Roboto Slab', 'Space Mono' sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -40,4 +116,337 @@ a {
 }
 
 @media (max-width: 600px) {
+}
+
+/* ------------------- */
+/* Utility classes     */
+/* ------------------- */
+
+/* general */
+
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+}
+
+.d-block {
+    display: block;
+}
+
+.container {
+    margin-inline: auto;
+    max-width: 90rem;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1rem;
+    height: 0.0625rem;
+    padding: 0;
+    margin: -0.0625rem;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; /* added line */
+    border: 0;
+}
+
+.skip-to-content {
+    position: absolute;
+    z-index: 9999;
+    background: hsl(var(--clr-white));
+    color: hsl(var(--clr-black));
+    padding: 0.5em 1em;
+    margin-inline: auto;
+    transform: translateY(-100%);
+    transition: transform 250ms ease-in;
+}
+
+.skip-to-content:focus {
+    transform: translateY(0);
+}
+
+/* colors */
+.text-dark {
+    color: hsl(var(--clr-dark));
+}
+.text-accent {
+    color: hsl(var(--clr-light));
+}
+.text-white {
+    color: hsl(var(--clr-white));
+}
+
+/* Text transform */
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* font family classes*/
+.ff-kumbh-sans {
+    font-family: var(--ff-kumbh-sans);
+}
+.ff-roboto-slab {
+    font-family: var(--ff-roboto-slab);
+}
+.ff-space-mono {
+    font-family: var(--ff-space-mono);
+}
+
+/* font sizes classes */
+.fs-12 {
+    font-size: var(--fs-12);
+}
+
+.fs-13 {
+    font-size: var(--fs-13);
+}
+
+.fs-14 {
+    font-size: var(--fs-14);
+}
+
+.fs-15 {
+    font-size: var(--fs-15);
+}
+
+.fs-16 {
+    font-size: var(--fs-16);
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+/* line height classes */
+
+.lh-120 {
+    line-height: var(--lh-120);
+}
+
+.lh-125 {
+    line-height: var(--lh-125);
+}
+
+.lh-130 {
+    line-height: var(--lh-130);
+}
+
+.lh-133 {
+    line-height: var(--lh-133);
+}
+
+.lh-145 {
+    line-height: var(--lh-145);
+}
+
+.lh-150 {
+    line-height: var(--lh-150);
+}
+
+/* letter spacing */
+.ls-5n {
+    letter-spacing: var(--ls-5n);
+}
+
+.ls-13 {
+    letter-spacing: var(--ls-13);
+}
+
+.ls-15 {
+    letter-spacing: var(--ls-15);
+}
+
+/* -------------- */
+/* Components    */
+/* --------------*/
+
+.clock-btn {
+    border: none;
+    background-color: hsl(var(--clr-red-400));
+    cursor: pointer;
+    font-family: var(--ff-kumbh-sans);
+    padding: var(--space-200);
+    border-radius: 1.6563rem;
+    width: 8.74rem;
+    height: 3.3125rem;
+}
+
+.clock-btn:hover {
+    background-color: hsl(var(--clr-red-500));
+}
+
+.clock-form {
+    flex-direction: column;
+    row-gap: 0.625rem;
+}
+
+.clock-form label {
+    color: hsl(var(--clr-blue-850), 0.4);
+    font-family: var(--ff-kumbh-sans);
+}
+
+.clock-form .input-wrapper {
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: hsl(var(--clr-blue-100));
+    border: none;
+    border-radius: 10px;
+    color: hsl(var(--clr-blue-850));
+    font-family: var(--ff-kumbh-sans);
+    padding: var(--space-200);
+    width: 140px;
+    height: 48px;
+}
+
+.clock-form .input-wrapper input {
+    background-color: hsl(var(--clr-blue-100));
+    border: none;
+    color: hsl(var(--clr-blue-850));
+    font-family: var(--ff-kumbh-sans);
+    height: 2rem;
+    width: 2rem;
+}
+
+.clock-form .input-wrapper .button-wrapper {
+    flex-direction: column-reverse;
+}
+
+.select-font-wrapper {
+    column-gap: var(--space-200);
+    margin: 1rem 0;
+}
+
+.select-font-wrapper > [aria-selected='true'] {
+    background-color: hsl(var(--clr-blue-900));
+    color: hsl(var(--clr-white) / 1);
+}
+
+.select-font-wrapper > [aria-selected='false'] {
+    background-color: hsla(227, 52%, 96%, 1);
+    color: hsl(var(--clr-blue-850));
+}
+
+.select-font-wrapper .font-btn {
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-grid;
+    place-items: center;
+    padding: 0.625rem 0.5625rem;
+    position: relative;
+    z-index: 1;
+}
+
+.select-font-wrapper .font-btn::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: -o-repeating-linear-gradient();
+    border-radius: 50%;
+    border: 0.0625rem solid hsl(var(--clr-blue-50));
+    opacity: 0;
+    transition: opacity 500ms linear, transform 750ms ease-in-out;
+}
+
+.font-btn:hover::before,
+.font-btn:focus::before {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.select-type-tab-wrapper {
+    background-color: hsl(var(--clr-blue-900));
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-200);
+    border-radius: 1.9688rem;
+    width: 25.75rem;
+}
+
+.select-type-tab-wrapper > [aria-selected='true'] {
+    background-color: hsl(var(--clr-red-400));
+    color: hsl(var(--clr-blue-850));
+}
+
+.select-type-tab-wrapper > [aria-selected='false'] {
+    background-color: transparent;
+    color: hsl(var(--clr-blue-100), 0.4);
+}
+
+.type-tab-btn {
+    border: none;
+    border-radius: 1.6563rem;
+    cursor: pointer;
+    padding: var(--space-200) 25.5px;
+}
+
+.type-tab-btn[aria-selected='false']:hover {
+    color: hsl(var(--clr-blue-100));
+}
+
+/* Timer */
+.timer-container {
+    /* background-color: hsl(var(--clr-blue-950)); */
+    border-radius: 205px;
+    background: var(--clr-gradient-1);
+    box-shadow: -50px -50px 100px 0px #272c5a, 50px 50px 100px 0px #121530;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 410px;
+    height: 410px;
+}
+
+.timer-circle {
+    position: relative;
+    background: hsl(var(--clr-blue-900));
+    width: 366px;
+    height: 366px;
+    border-radius: 100%;
+}
+
+.timer-circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-circle circle {
+    fill: none;
+    stroke-width: 10;
+    stroke: hsl(var(--clr-blue-900));
+}
+
+.timer-circle circle:last-child {
+    stroke: hsl(var(--clr-red-400));
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear;
+}
+
+.timer-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    flex-direction: column;
+    row-gap: var(--space-100);
+}
+
+.timer-display span {
+    font-size: 100px;
+}
+
+.timer-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: hsl(var(--clr-blue-100));
 }
