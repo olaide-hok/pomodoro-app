@@ -1,19 +1,25 @@
 'use client';
 
-import {useState} from 'react';
-
 type ColorOption = {
     id: string;
     className: string;
 };
 
-const ColorTabs = () => {
-    const [selectedColor, setSelectedColor] = useState<string>('red'); // Default selected color
+import {TimerFormState} from '@/hooks/useTimer';
 
+interface ColorTabsProps {
+    timerForm: TimerFormState;
+    handleTimerFormChange: (
+        name: keyof TimerFormState,
+        value: string | number
+    ) => void;
+}
+
+const ColorTabs = ({timerForm, handleTimerFormChange}: ColorTabsProps) => {
     const colors: ColorOption[] = [
-        {id: 'red', className: 'bg-red-400'},
-        {id: 'cyan', className: 'bg-cyan-300'},
-        {id: 'purple', className: 'bg-purple-400'},
+        {id: 'red-400', className: 'bg-red-400'},
+        {id: 'cyan-300', className: 'bg-cyan-300'},
+        {id: 'purple-400', className: 'bg-purple-400'},
     ];
 
     const Checkmark = () => (
@@ -44,15 +50,19 @@ const ColorTabs = () => {
                         key={color.id}
                         className={`color-btn ${color.className} relative`}
                         aria-selected={
-                            selectedColor === color.id ? 'true' : 'false'
+                            timerForm.selectedColor === color.id
+                                ? 'true'
+                                : 'false'
                         }
                         type="button"
                         role="tab"
-                        onClick={() => setSelectedColor(color.id)}
+                        onClick={() => {
+                            handleTimerFormChange('selectedColor', color.id);
+                        }}
                         aria-label={`Select ${color.id} color`} // Better accessibility
                     >
                         <span className="sr-only">{color.id}</span>
-                        {selectedColor === color.id && <Checkmark />}
+                        {timerForm.selectedColor === color.id && <Checkmark />}
                     </button>
                 ))}
             </div>
