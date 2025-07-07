@@ -1,29 +1,30 @@
-import React from 'react';
+import {useState} from 'react';
 
+type FontOption = {
+    id: string;
+    className: string;
+};
 const FontTypeButton = () => {
+    const [selectedFont, setSelectedFont] = useState('kumbh-sans');
+
+    const fonts: FontOption[] = [
+        {id: 'kumbh-sans', className: 'ff-kumbh-sans'},
+        {id: 'roboto-slab', className: 'ff-roboto-slab'},
+        {id: 'space-mono', className: 'ff-space-mono'},
+    ];
     return (
         <div className="select-font-wrapper flex" role="tablist">
-            <button
-                className="font-btn ff-kumbh-sans fw-700 fs-16 lh-125"
-                type="button"
-                role="tab"
-                aria-selected="true">
-                Aa
-            </button>
-            <button
-                className="font-btn ff-roboto-slab fs-16 lh-125"
-                type="button"
-                role="tab"
-                aria-selected="false">
-                Aa
-            </button>
-            <button
-                className="font-btn ff-space-mono fw-700 fs-16 lh-125"
-                type="button"
-                role="tab"
-                aria-selected="false">
-                Aa
-            </button>
+            {fonts.map((font) => (
+                <button
+                    key={font.id}
+                    className={`font-btn ${font.className} fw-700 fs-16 lh-125`}
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedFont === font.id ? 'true' : 'false'}
+                    onClick={() => setSelectedFont(font.id)}>
+                    Aa
+                </button>
+            ))}
         </div>
     );
 };
