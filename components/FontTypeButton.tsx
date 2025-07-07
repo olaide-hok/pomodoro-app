@@ -1,12 +1,19 @@
-import {useState} from 'react';
+import {TimerFormState} from '@/hooks/useTimer';
 
 type FontOption = {
     id: string;
     className: string;
 };
-const FontTypeButton = () => {
-    const [selectedFont, setSelectedFont] = useState('kumbh-sans');
 
+interface FontTypeProps {
+    timerForm: TimerFormState;
+    handleTimerFormChange: (
+        name: keyof TimerFormState,
+        value: string | number
+    ) => void;
+}
+
+const FontTypeButton = ({timerForm, handleTimerFormChange}: FontTypeProps) => {
     const fonts: FontOption[] = [
         {id: 'kumbh-sans', className: 'ff-kumbh-sans'},
         {id: 'roboto-slab', className: 'ff-roboto-slab'},
@@ -20,8 +27,12 @@ const FontTypeButton = () => {
                     className={`font-btn ${font.className} fw-700 fs-16 lh-125`}
                     type="button"
                     role="tab"
-                    aria-selected={selectedFont === font.id ? 'true' : 'false'}
-                    onClick={() => setSelectedFont(font.id)}>
+                    aria-selected={
+                        timerForm.selectedFont === font.id ? 'true' : 'false'
+                    }
+                    onClick={() => {
+                        handleTimerFormChange('selectedFont', font.id);
+                    }}>
                     Aa
                 </button>
             ))}
