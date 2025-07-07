@@ -1,26 +1,35 @@
-import React from 'react';
 import TimeInput from './TimeInput';
 import FontTypeButton from './FontTypeButton';
 import Button from './Button';
 import ColorTabs from './ColorTabs';
+import {TimerFormState} from '@/hooks/useTimer';
 
 interface SettingsModalProps {
     closeModal: () => void;
+    timerForm: TimerFormState;
+    handleTimerFormChange: (
+        name: keyof TimerFormState,
+        value: string | number
+    ) => void;
 }
 
-const SettingsModal = ({closeModal}: SettingsModalProps) => {
+const SettingsModal = ({
+    closeModal,
+    timerForm,
+    handleTimerFormChange,
+}: SettingsModalProps) => {
     return (
         <div className="settings-overlay">
-            <div className="settings-modal">
+            <div className="settings-modal ff-kumbh-sans">
                 <div className="header flex">
                     <h1 className="text-blue-900 fs-28 fw-700 lh-125">
                         Settings
                     </h1>
                     <button
+                        aria-label="close modal"
                         className="close-modal-btn"
                         onClick={closeModal}
                         type="button">
-                        <span className="sr-only">Close</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="14"
@@ -41,27 +50,34 @@ const SettingsModal = ({closeModal}: SettingsModalProps) => {
                     </h2>
 
                     <div className="time-input-wrapper flex">
-                        <TimeInput label="pomodoro" />
-                        <TimeInput label="short break" />
-                        <TimeInput label="long break" />
+                        <TimeInput
+                            timerForm={timerForm}
+                            handleTimerFormChange={handleTimerFormChange}
+                        />
                     </div>
                 </div>
 
                 {/* Fonts */}
                 <div className="font-fields flex">
                     <h2 className="font text-blue-900 fw-700 uppercase">
-                        Fonts
+                        Font
                     </h2>
 
-                    <FontTypeButton />
+                    <FontTypeButton
+                        timerForm={timerForm}
+                        handleTimerFormChange={handleTimerFormChange}
+                    />
                 </div>
 
                 {/* Colors */}
-                <ColorTabs />
+                <ColorTabs
+                    timerForm={timerForm}
+                    handleTimerFormChange={handleTimerFormChange}
+                />
 
                 {/* Apply Button */}
                 <div className="apply-btn-wrapper">
-                    <Button title="Apply" />
+                    <Button title="Apply" fn={closeModal} />
                 </div>
             </div>
         </div>
