@@ -1,27 +1,33 @@
+import {useState} from 'react';
+
+type TabTypeOption = {
+    id: string;
+    name: string;
+};
 const TimerTabs = () => {
+    const [activeTab, setActiveTab] = useState('pomodoro');
+
+    const typeTabs: TabTypeOption[] = [
+        {id: 'pomodoro', name: 'pomodoro'},
+        {id: 'short-break', name: 'short break'},
+        {id: 'long-break', name: 'long break'},
+    ];
+
     return (
         <div className="select-type-tab-wrapper flex" role="tablist">
-            <button
-                className="type-tab-btn ff-kumbh-sans fw-700 fs-14 lh-120"
-                type="button"
-                role="tab"
-                aria-selected="true">
-                pomodoro
-            </button>
-            <button
-                className="type-tab-btn ff-kumbh-sans fs-14 fw-700 lh-120"
-                type="button"
-                role="tab"
-                aria-selected="false">
-                short break
-            </button>
-            <button
-                className="type-tab-btn ff-kumbh-sans fw-700 fs-14 lh-120"
-                type="button"
-                role="tab"
-                aria-selected="false">
-                long break
-            </button>
+            {typeTabs.map((tab) => (
+                <button
+                    key={tab.id}
+                    className={`type-tab-btn ff-kumbh-sans fw-700 lh-120 ${
+                        activeTab === tab.id ? 'active' : ''
+                    }`}
+                    type="button"
+                    role="tab"
+                    aria-selected={activeTab === tab.id ? 'true' : 'false'}
+                    onClick={() => setActiveTab(tab.id)}>
+                    {tab.name}
+                </button>
+            ))}
         </div>
     );
 };
