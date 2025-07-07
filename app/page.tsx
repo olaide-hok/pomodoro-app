@@ -1,7 +1,9 @@
+import TimerDetails from './TimerDetails';
+
 export default function HomePage() {
     return (
-        <div>
-            <main></main>
-        </div>
+        <main className="container">
+            <TimerDetails />
+        </main>
     );
 }
