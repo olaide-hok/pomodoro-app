@@ -3,7 +3,7 @@ import {useState} from 'react';
 interface FormInputInterface {
     label: string;
 }
-const FormInput = ({label}: FormInputInterface) => {
+const TimeInput = ({label}: FormInputInterface) => {
     const [time, setTime] = useState(25);
 
     const handleDecrement = () => {
@@ -75,4 +75,4 @@ const FormInput = ({label}: FormInputInterface) => {
     );
 };
 
-export default FormInput;
+export default TimeInput;
