@@ -1,9 +1,10 @@
 'use client';
 
+import {TimerFormState} from '@/hooks/useTimer';
 import {useState, useEffect} from 'react';
 
-const Timer = () => {
-    const [time, setTime] = useState<number>(17 * 60 + 59); // Initial time in seconds (17:59)
+const Timer = ({timerForm}: {timerForm: TimerFormState}) => {
+    const [time, setTime] = useState<number>(timerForm.pomodoro * 60); // Initial time in seconds (17:59)
     const [isActive, setIsActive] = useState<boolean>(false);
     const [size, setSize] = useState<number>(410); // Base size for desktop (410px)
 
@@ -46,9 +47,23 @@ const Timer = () => {
 
     const radius = size * 0.45; // 45% of size for r
     const circumference = 2 * Math.PI * radius;
-    const dashOffset = circumference * (1 - time / (18 * 60)) || 0;
+    const totalTimeInSeconds = timerForm.pomodoro * 60; // Total time in seconds
+    const dashOffset = circumference * (1 - time / totalTimeInSeconds) || 0;
 
-    const fontFamily = 'ff-kumbh-sans';
+    const bgColorHSLValue = {
+        'red-400': 'hsl(var(--clr-red-400))',
+        'cyan-300': 'hsl(var(--clr-cyan-300))',
+        'purple-400': 'hsl(var(--clr-purple-400))',
+    };
+
+    const strokeColor =
+        bgColorHSLValue[
+            timerForm.selectedColor as keyof typeof bgColorHSLValue
+        ];
+
+    const fontFamily = `ff-${timerForm.selectedFont}`;
+
+    // const timers = [{id: 'pomodoro'}, {id: 'shortBreak'}, {id: 'longBreak'}];
 
     return (
         <div className="timer-container">
@@ -70,17 +85,18 @@ const Timer = () => {
                             strokeDasharray: circumference,
                             strokeDashoffset: dashOffset,
                             transition: 'stroke-dashoffset 1s linear',
+                            stroke: strokeColor,
                         }}
                     />
                 </svg>
                 <div className="timer-display flex">
-                    <span className={`${fontFamily} fw-700 lh-125 ls-5`}>
+                    <span className={`${fontFamily} fw-700 lh-125 ls-5n`}>
                         {minutes.toString().padStart(2, '0')}:
                         {seconds.toString().padStart(2, '0')}
                     </span>
                     <button
                         type="button"
-                        className="timer-btn fw-700 uppercase"
+                        className={`timer-btn ${fontFamily} fw-700 uppercase`}
                         onClick={toggleTimer}>
                         {isActive ? 'pause' : 'start'}
                     </button>
