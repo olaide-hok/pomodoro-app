@@ -271,6 +271,9 @@ a {
 .ls-5n {
     letter-spacing: var(--ls-5n);
 }
+.ls-5p {
+    letter-spacing: var(--ls-5p);
+}
 
 .ls-13 {
     letter-spacing: var(--ls-13);
@@ -330,7 +333,17 @@ a {
 }
 
 .clock-form .input-wrapper .button-wrapper {
-    flex-direction: column-reverse;
+    flex-direction: column;
+}
+
+.button-wrapper button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button-wrapper button:hover svg path {
+    stroke-opacity: 1;
 }
 
 .select-font-wrapper {
@@ -388,7 +401,6 @@ a {
 }
 
 .select-type-tab-wrapper > [aria-selected='true'] {
-    background-color: hsl(var(--clr-red-400));
     color: hsl(var(--clr-blue-850));
 }
 
@@ -447,7 +459,6 @@ a {
 }
 
 .timer-circle circle:last-child {
-    stroke: hsl(var(--clr-red-400));
     stroke-linecap: round;
     transition: stroke-dashoffset 1s linear;
 }
