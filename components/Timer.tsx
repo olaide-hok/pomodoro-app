@@ -1,18 +1,19 @@
 'use client';
 
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 
 interface TimerProps {
-    initalTime: number;
+    initialTime: number;
     font: string;
     bgColor: string;
     activeTab: string;
 }
 
-const Timer = ({initalTime, activeTab, font, bgColor}: TimerProps) => {
-    const [time, setTime] = useState<number>(initalTime * 60); // Initial time in seconds (17:59)
+const Timer = ({initialTime, activeTab, font, bgColor}: TimerProps) => {
+    const [time, setTime] = useState<number>(initialTime * 60); // Initial time in seconds (17:59)
     const [isActive, setIsActive] = useState<boolean>(false);
     const [size, setSize] = useState<number>(410); // Base size for desktop (410px)
+    const audioRef = useRef<HTMLAudioElement>(null); // Ref for audio element
 
     // Update size based on window width
     useEffect(() => {
@@ -31,6 +32,25 @@ const Timer = ({initalTime, activeTab, font, bgColor}: TimerProps) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    // Sync time with initialTime changes
+    useEffect(() => {
+        // Reset time to initialTime when it changes, but preserve proportion if running
+        const newTotalTime = initialTime * 60;
+        if (time > newTotalTime) {
+            setTime(newTotalTime); // Cap time if new initialTime is shorter
+        } else if (time <= 0) {
+            setTime(newTotalTime); // Reset to full time if timer is done
+        } else if (isActive) {
+            // If running, adjust remaining time proportionally
+            const remainingRatio =
+                time / (time + (newTotalTime - initialTime * 60));
+            setTime(Math.floor(newTotalTime * remainingRatio));
+            setIsActive(false); // pause the timer automatically on initialTime change
+        } else {
+            setTime(newTotalTime); // Reset to full time if not running
+        }
+    }, [initialTime]);
+
     useEffect(() => {
         let interval: NodeJS.Timeout | null = null;
         if (isActive && time > 0) {
@@ -45,15 +65,33 @@ const Timer = ({initalTime, activeTab, font, bgColor}: TimerProps) => {
                 clearInterval(interval); // Cleanup on unmount or dependency change
             }
         };
-    }, [isActive, time, initalTime]);
+    }, [isActive, time]);
+
+    // Trigger ringer when time reaches 0
+    useEffect(() => {
+        if (time === 0 && audioRef.current) {
+            audioRef.current.play().catch((error) => {
+                console.error('Audio play failed:', error);
+            });
+        }
+    }, [time]);
 
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    const toggleTimer = () => setIsActive(!isActive);
+    const toggleTimer = () => {
+        if (time <= 0) {
+            // Restart the timer from initial time
+            setTime(initialTime * 60);
+            setIsActive(true);
+        } else {
+            // Toggle between Start and Pause
+            setIsActive((prev) => !prev);
+        }
+    };
 
     const radius = size * 0.45; // 45% of size for r
     const circumference = 2 * Math.PI * radius;
-    const totalTimeInSeconds = initalTime * 60; // Total time in seconds
+    const totalTimeInSeconds = initialTime * 60; // Total time in seconds
     const dashOffset = circumference * (1 - time / totalTimeInSeconds) || 0;
 
     const bgColorHSLValue = {
@@ -98,10 +136,11 @@ const Timer = ({initalTime, activeTab, font, bgColor}: TimerProps) => {
                         type="button"
                         className={`timer-btn ${font} fw-700 uppercase`}
                         onClick={toggleTimer}>
-                        {isActive ? 'pause' : 'start'}
+                        {time <= 0 ? 'restart' : isActive ? 'pause' : 'start'}
                     </button>
                 </div>
             </div>
+            <audio ref={audioRef} src="/pomodoro-audio.mp3" />
         </div>
     );
 };
