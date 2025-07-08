@@ -8,6 +8,8 @@ export interface TimerFormState {
     selectedColor: string;
 }
 
+export type TimeField = 'pomodoro' | 'shortBreak' | 'longBreak';
+
 export function useTimer() {
     const [selectedFont, setSelectedFont] = useState('kumbh-sans');
 
