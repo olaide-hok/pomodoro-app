@@ -1,10 +1,16 @@
 'use client';
 
-import {TimerFormState} from '@/hooks/useTimer';
 import {useState, useEffect} from 'react';
 
-const Timer = ({timerForm}: {timerForm: TimerFormState}) => {
-    const [time, setTime] = useState<number>(timerForm.pomodoro * 60); // Initial time in seconds (17:59)
+interface TimerProps {
+    initalTime: number;
+    font: string;
+    bgColor: string;
+    activeTab: string;
+}
+
+const Timer = ({initalTime, activeTab, font, bgColor}: TimerProps) => {
+    const [time, setTime] = useState<number>(initalTime * 60); // Initial time in seconds (17:59)
     const [isActive, setIsActive] = useState<boolean>(false);
     const [size, setSize] = useState<number>(410); // Base size for desktop (410px)
 
@@ -39,7 +45,7 @@ const Timer = ({timerForm}: {timerForm: TimerFormState}) => {
                 clearInterval(interval); // Cleanup on unmount or dependency change
             }
         };
-    }, [isActive, time]);
+    }, [isActive, time, initalTime]);
 
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -47,7 +53,7 @@ const Timer = ({timerForm}: {timerForm: TimerFormState}) => {
 
     const radius = size * 0.45; // 45% of size for r
     const circumference = 2 * Math.PI * radius;
-    const totalTimeInSeconds = timerForm.pomodoro * 60; // Total time in seconds
+    const totalTimeInSeconds = initalTime * 60; // Total time in seconds
     const dashOffset = circumference * (1 - time / totalTimeInSeconds) || 0;
 
     const bgColorHSLValue = {
@@ -57,16 +63,10 @@ const Timer = ({timerForm}: {timerForm: TimerFormState}) => {
     };
 
     const strokeColor =
-        bgColorHSLValue[
-            timerForm.selectedColor as keyof typeof bgColorHSLValue
-        ];
-
-    const fontFamily = `ff-${timerForm.selectedFont}`;
-
-    // const timers = [{id: 'pomodoro'}, {id: 'shortBreak'}, {id: 'longBreak'}];
+        bgColorHSLValue[bgColor as keyof typeof bgColorHSLValue];
 
     return (
-        <div className="timer-container">
+        <div className={`timer-container ${activeTab}`}>
             <div className="timer-circle" style={{width: size, height: size}}>
                 <svg viewBox={`0 0 ${size} ${size}`}>
                     <circle
@@ -89,14 +89,14 @@ const Timer = ({timerForm}: {timerForm: TimerFormState}) => {
                         }}
                     />
                 </svg>
-                <div className="timer-display flex">
-                    <span className={`${fontFamily} fw-700 lh-125 ls-5n`}>
+                <div className={`timer-display ${font} flex`}>
+                    <span className={``}>
                         {minutes.toString().padStart(2, '0')}:
                         {seconds.toString().padStart(2, '0')}
                     </span>
                     <button
                         type="button"
-                        className={`timer-btn ${fontFamily} fw-700 uppercase`}
+                        className={`timer-btn ${font} fw-700 uppercase`}
                         onClick={toggleTimer}>
                         {isActive ? 'pause' : 'start'}
                     </button>
