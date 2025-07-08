@@ -1,4 +1,4 @@
-import {TimerFormState} from '@/hooks/useTimer';
+import {TimeField, TimerFormState} from '@/hooks/useTimer';
 
 interface FormInputInterface {
     timerForm: TimerFormState;
@@ -7,8 +7,6 @@ interface FormInputInterface {
         value: string | number
     ) => void;
 }
-
-type TimeField = 'pomodoro' | 'shortBreak' | 'longBreak';
 
 const TimeInput = ({timerForm, handleTimerFormChange}: FormInputInterface) => {
     const handleDecrement = (id: TimeField, currentValue: number) => {
