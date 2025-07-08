@@ -413,7 +413,7 @@ a {
     border: none;
     border-radius: 1.6563rem;
     cursor: pointer;
-    padding: 1.0313rem 1.173rem;
+    padding: 1.0313rem 0.873rem;
     font-size: var(--fs-12);
 }
 
@@ -438,6 +438,10 @@ a {
     /* height: 19.75rem; */
     /* height: 100%; */
     aspect-ratio: 1;
+}
+
+.timer-container.false {
+    display: none;
 }
 
 .timer-circle {
@@ -473,8 +477,43 @@ a {
     flex-direction: column;
 }
 
-.timer-display span {
+.kumbh-sans span {
+    font-family: var(--ff-kumbh-sans);
     font-size: var(--fs-80);
+    font-weight: 700;
+    line-height: var(--lh-125);
+    letter-spacing: var(--ls-5n);
+}
+
+.roboto-slab span {
+    font-family: var(--ff-roboto-slab);
+    font-size: var(--fs-80);
+    font-weight: 700;
+    line-height: var(--lh-133);
+}
+
+.roboto-slab {
+    font-family: var(--ff-roboto-slab);
+    font-size: var(--fs-14);
+    font-weight: 700;
+    line-height: var(--lh-130);
+    letter-spacing: var(--ls-13);
+}
+
+.space-mono span {
+    font-family: var(--ff-space-mono);
+    font-size: var(--fs-80);
+    font-weight: 400;
+    line-height: var(--lh-120);
+    letter-spacing: var(--ls-10n);
+}
+
+.timer-btn.space-mono {
+    font-family: var(--ff-space-mono);
+    font-size: var(--fs-14);
+    font-weight: 700;
+    line-height: var(--lh-150);
+    letter-spacing: var(--ls-13);
 }
 
 .timer-btn {
@@ -482,6 +521,10 @@ a {
     border: none;
     cursor: pointer;
     color: hsl(var(--clr-blue-100));
+}
+
+.timer-btn.kumbh-sans {
+    font-family: var(--ff-kumbh-sans);
     font-size: var(--fs-14);
     line-height: var(--lh-120);
     letter-spacing: var(--ls-13);
@@ -657,8 +700,8 @@ a {
 }
 
 .apply-btn-wrapper {
+    justify-self: center;
     position: absolute;
-    transform: translate(70%, 5%);
 }
 
 /* ------------- */
@@ -686,7 +729,8 @@ a {
     .timer-container {
         border-radius: 205px;
         background: var(--clr-gradient-1);
-        box-shadow: -50px -50px 100px 0px #272c5a, 50px 50px 100px 0px #121530;
+        box-shadow: -2.1875rem -2.5rem 1.875rem 0 #272c5a,
+            1.875rem 1.875rem 1.5625rem 0 #121530;
         border-radius: 205px;
         width: 410px;
         height: 410px;
@@ -701,13 +745,38 @@ a {
         row-gap: var(--space-100);
     }
 
-    .timer-display span {
+    .timer-display.kumbh-sans span {
         font-size: var(--fs-100);
     }
 
-    .timer-btn {
+    .timer-btn.kumbh-sans {
         font-size: var(--fs-16);
         line-height: var(--lh-125);
+        letter-spacing: var(--ls-15);
+    }
+
+    .roboto-slab span {
+        font-size: var(--fs-100);
+        line-height: var(--lh-130);
+    }
+
+    .roboto-slab {
+        font-size: var(--fs-16);
+        font-weight: 700;
+        line-height: var(--lh-125);
+        letter-spacing: var(--ls-15);
+    }
+
+    .space-mono span {
+        font-size: var(--fs-100);
+        line-height: var(--lh-150);
+        letter-spacing: var(--ls-10n);
+    }
+
+    .timer-btn.space-mono {
+        font-size: var(--fs-16);
+        font-weight: 700;
+        line-height: var(--lh-150);
         letter-spacing: var(--ls-15);
     }
 
@@ -719,6 +788,16 @@ a {
     .clock-form {
         flex-direction: column;
         row-gap: 0.625rem;
+    }
+
+    .settings-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .settings-modal {
+        max-width: 33.75rem;
     }
 }
 
