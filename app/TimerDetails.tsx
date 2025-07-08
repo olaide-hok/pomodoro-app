@@ -35,7 +35,7 @@ const TimerDetails = () => {
                     {timers.map((timer) => (
                         <Timer
                             key={timer.id}
-                            initalTime={timerForm[timer.id as TimeField]}
+                            initialTime={timerForm[timer.id as TimeField]}
                             activeTab={
                                 activeTab === timer.id ? 'true' : 'false'
                             }
