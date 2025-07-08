@@ -1,16 +1,19 @@
-import {useState} from 'react';
+interface TimeTabsProps {
+    font: string;
+    bgColor: string;
+    activeTab: string;
+    setActiveTab: (tab: string) => void;
+}
 
 type TabTypeOption = {
     id: string;
     name: string;
 };
-const TimerTabs = ({font, bgColor}: {font: string; bgColor: string}) => {
-    const [activeTab, setActiveTab] = useState('pomodoro');
-
+const TimerTabs = ({activeTab, setActiveTab, font, bgColor}: TimeTabsProps) => {
     const typeTabs: TabTypeOption[] = [
         {id: 'pomodoro', name: 'pomodoro'},
-        {id: 'short-break', name: 'short break'},
-        {id: 'long-break', name: 'long break'},
+        {id: 'shortBreak', name: 'short break'},
+        {id: 'longBreak', name: 'long break'},
     ];
 
     return (
