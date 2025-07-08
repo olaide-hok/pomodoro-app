@@ -4,12 +4,16 @@ import SettingsBtn from '@/components/SettingsBtn';
 import SettingsModal from '@/components/SettingsModal';
 import Timer from '@/components/Timer';
 import TimerTabs from '@/components/TimerTabs';
-import {useTimer} from '@/hooks/useTimer';
+import {TimeField, useTimer} from '@/hooks/useTimer';
 import {useState} from 'react';
 
 const TimerDetails = () => {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const {timerForm, handleTimerFormChange} = useTimer();
+
+    const [activeTab, setActiveTab] = useState('pomodoro');
+
+    const timers = [{id: 'pomodoro'}, {id: 'shortBreak'}, {id: 'longBreak'}];
 
     return (
         <>
@@ -20,11 +24,26 @@ const TimerDetails = () => {
                         pomodoro
                     </h1>
                     <TimerTabs
+                        activeTab={activeTab}
+                        setActiveTab={setActiveTab}
                         font={timerForm.selectedFont}
                         bgColor={timerForm.selectedColor}
                     />
                 </div>
-                <Timer timerForm={timerForm} />
+
+                <div className="timers-wrapper">
+                    {timers.map((timer) => (
+                        <Timer
+                            key={timer.id}
+                            initalTime={timerForm[timer.id as TimeField]}
+                            activeTab={
+                                activeTab === timer.id ? 'true' : 'false'
+                            }
+                            font={timerForm.selectedFont}
+                            bgColor={timerForm.selectedColor}
+                        />
+                    ))}
+                </div>
 
                 <SettingsBtn openSettings={() => setIsSettingsOpen(true)} />
             </div>
