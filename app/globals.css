@@ -367,7 +367,6 @@ a {
     z-index: -1;
     width: 100%;
     height: 100%;
-    background: -o-repeating-linear-gradient();
     border-radius: 50%;
     border: var(--space-1) solid hsl(var(--clr-blue-50));
     opacity: 0;
@@ -422,10 +421,6 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* width: 19.75rem; */
-    /* width: 100%; */
-    /* height: 19.75rem; */
-    /* height: 100%; */
     aspect-ratio: 1;
 }
 
@@ -799,7 +794,7 @@ a {
 
 @media (min-width: 48em) {
     .timer-details-wrapper {
-        padding: var(--space-300) 0 3.4375rem;
+        padding: var(--space-600) 0 3.4375rem;
     }
 
     .timer-tabs-title {
