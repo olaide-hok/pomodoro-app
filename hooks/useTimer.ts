@@ -31,8 +31,6 @@ export function useTimer() {
         }));
     };
 
-    console.log('timer form--', JSON.stringify(timerForm, null, 2));
-
     return {
         selectedFont,
         setSelectedFont,
