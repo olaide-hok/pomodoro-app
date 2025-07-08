@@ -315,12 +315,12 @@ a {
 
     background-color: hsl(var(--clr-blue-100));
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     color: hsl(var(--clr-blue-850));
     font-family: var(--ff-kumbh-sans);
     padding: var(--space-200);
-    width: 140px;
-    height: 48px;
+    width: 8.75rem;
+    height: 3rem;
 }
 
 .clock-form .input-wrapper input {
@@ -428,7 +428,7 @@ a {
         --clr-gradient-1,
         linear-gradient(271deg, #2e325a 0%, #0e112a 100%)
     );
-    box-shadow: -1.125rem -1.125rem 6.25rem 0px #272c5a,
+    box-shadow: -1.125rem -1.125rem 6.25rem 0 #272c5a,
         1.125rem 1.125rem 6.25rem 0 #121530;
     display: flex;
     align-items: center;
@@ -594,7 +594,7 @@ a {
     align-items: center;
     padding-block: var(--space-200);
     padding-inline: var(--space-300);
-    border-bottom: 1px solid hsl(var(--clr-grey-200));
+    border-bottom: 0.0625rem solid hsl(var(--clr-grey-200));
     margin-bottom: var(--space-200);
 }
 
@@ -609,7 +609,7 @@ a {
     flex-direction: column;
     row-gap: var(--space-200);
     margin-inline: var(--space-300);
-    border-bottom: 1px solid hsl(var(--clr-grey-200));
+    border-bottom: 0.0625rem solid hsl(var(--clr-grey-200));
     padding-bottom: var(--space-300);
 }
 
@@ -630,7 +630,7 @@ a {
     flex-direction: column;
     row-gap: var(--space-200);
     margin-inline: var(--space-300);
-    border-bottom: 1px solid hsl(var(--clr-grey-200));
+    border-bottom: 0.0625rem solid hsl(var(--clr-grey-200));
     padding-block: var(--space-300);
 }
 
@@ -722,23 +722,22 @@ a {
 
     .type-tab-btn {
         font-size: var(--fs-14);
-        padding: var(--space-200) 25.5px;
+        padding: var(--space-200) 1.3687rem;
     }
 
     /* Timer */
     .timer-container {
-        border-radius: 205px;
         background: var(--clr-gradient-1);
         box-shadow: -2.1875rem -2.5rem 1.875rem 0 #272c5a,
             1.875rem 1.875rem 1.5625rem 0 #121530;
-        border-radius: 205px;
-        width: 410px;
-        height: 410px;
+        border-radius: 12.8125rem;
+        width: 25.625rem;
+        height: 25.625rem;
     }
 
     .timer-circle {
-        width: 366px;
-        height: 366px;
+        width: 22.875rem;
+        height: 22.875rem;
     }
 
     .timer-display {
