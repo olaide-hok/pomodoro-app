@@ -48,7 +48,13 @@ Users should be able to:
 
 ## Getting Started
 
-First, run the development server:
+First clone the repository `git clone https://github.com/olaide-hok/pomodoro-app.git`
+
+Change directory into the cloned folder `cd pomodoro-app`
+
+Run `npm install` to install dependencies.
+
+Then, run the development server:
 
 ```bash
 npm run dev
